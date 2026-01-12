@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egeocate Lab for GIS & RS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#2563eb;--primary-dark:#1d4ed8;--secondary:#10b981;--accent:#f59e0b;--dark:#0f172a;--text:#334155;--text-light:#64748b;--bg:#fff;--bg-soft:#f8fafc;--border:#e2e8f0}
+        body{font-family:'Poppins','Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;direction:rtl}
+        
+        .hero{background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(59,130,246,0.9)),url('https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/courses.jpeg') center/cover;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative}
+        .hero-content{position:relative;z-index:1;max-width:900px}
+        .logo-main{width:140px;height:140px;border-radius:30px;margin:0 auto 30px;box-shadow:0 20px 60px rgba(0,0,0,0.4);overflow:hidden;border:4px solid rgba(255,255,255,0.3)}
+        .logo-main img{width:100%;height:100%;object-fit:cover}
+        .hero h1{font-size:3rem;font-weight:800;color:#fff;margin-bottom:15px;text-shadow:0 4px 20px rgba(0,0,0,0.3)}
+        .hero h1 span{color:#fbbf24}
+        .hero-subtitle{font-size:1.3rem;color:rgba(255,255,255,0.95);margin-bottom:40px}
+        .hero-badges{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+        .hero-badge{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:12px 25px;border-radius:50px;color:#fff;font-size:0.9rem;font-weight:600;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;gap:8px}
+        .scroll-btn{background:#fff;color:var(--primary);padding:18px 45px;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;border:none;box-shadow:0 10px 40px rgba(0,0,0,0.2);transition:all 0.3s;display:inline-flex;align-items:center;gap:10px}
+        .scroll-btn:hover{transform:translateY(-5px);box-shadow:0 15px 50px rgba(0,0,0,0.3)}
+        
+        nav{background:#fff;padding:15px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.08)}
+        .nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+        .nav-logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.2rem;color:var(--dark)}
+        .nav-logo img{width:45px;height:45px;border-radius:12px;object-fit:cover}
+        .nav-links{display:flex;gap:30px}
+        .nav-links a{color:var(--text);text-decoration:none;font-weight:500;font-size:0.95rem;transition:color 0.3s}
+        .nav-links a:hover{color:var(--primary)}
+        .menu-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--dark)}
+        
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        section{padding:80px 0}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-badge{display:inline-block;background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(16,185,129,0.1));color:var(--primary);padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:15px}
+        .section-title{font-size:2.5rem;font-weight:800;color:var(--dark);margin-bottom:15px}
+        .section-subtitle{color:var(--text-light);font-size:1.1rem;max-width:600px;margin:0 auto}
+        
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+        .service-card{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--border);transition:all 0.4s}
+        .service-card:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(0,0,0,0.12)}
+        .service-image{height:180px;overflow:hidden}
+        .service-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+        .service-card:hover .service-image img{transform:scale(1.1)}
+        .service-content{padding:25px}
+        .service-content h3{font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+        .service-content p{color:var(--text-light);font-size:0.9rem;line-height:1.8}
+        
+        .about-section{background:var(--bg-soft)}
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .about-image{border-radius:30px;height:450px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.15)}
+        .about-image img{width:100%;height:100%;object-fit:cover}
+        .about-content h2{font-size:2.2rem;font-weight:800;color:var(--dark);margin-bottom:25px}
+        .about-content p{color:var(--text);font-size:1rem;margin-bottom:20px;line-height:2}
+        .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:35px}
+        .stat-item{text-align:center;padding:25px;background:#fff;border-radius:16px;border:1px solid var(--border)}
+        .stat-number{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .stat-label{color:var(--text-light);font-size:0.9rem;margin-top:5px}
+        
+        .courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+        .course-card{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--border);transition:all 0.4s}
+        .course-card:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(0,0,0,0.12)}
+        .course-image{height:180px;position:relative;overflow:hidden}
+        .course-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+        .course-card:hover .course-image img{transform:scale(1.1)}
+        .course-badge{position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);padding:6px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;color:#fff}
+        .course-content{padding:25px}
+        .course-content h3{font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+        .course-content p{color:var(--text-light);font-size:0.85rem;margin-bottom:15px;line-height:1.7}
+        .course-meta{display:flex;justify-content:space-between;align-items:center;padding-top:15px;border-top:1px solid var(--border)}
+        .course-price{font-size:1.4rem;font-weight:800;color:var(--primary)}
+        .course-price span{font-size:0.85rem;font-weight:500;color:var(--text-light)}
+        .course-btn{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:10px 20px;border-radius:10px;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.3s}
+        .course-btn:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(37,99,235,0.3)}
+        
+        .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
+        .feature-item{background:#fff;border-radius:20px;padding:30px 20px;text-align:center;border:1px solid var(--border);transition:all 0.3s}
+        .feature-item:hover{border-color:var(--primary);box-shadow:0 10px 40px rgba(37,99,235,0.1)}
+        .feature-icon{width:60px;height:60px;background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(16,185,129,0.1));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 15px}
+        .feature-item h4{font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:8px}
+        .feature-item p{color:var(--text-light);font-size:0.8rem}
+        
+        .instructor-section{background:linear-gradient(135deg,#1e3a8a,#3b82f6)}
+        .instructor-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);border-radius:30px;padding:50px;display:flex;align-items:center;gap:50px;border:1px solid rgba(255,255,255,0.2)}
+        .instructor-avatar{width:220px;height:220px;border-radius:50%;overflow:hidden;flex-shrink:0;border:5px solid rgba(255,255,255,0.3);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+        .instructor-avatar img{width:100%;height:100%;object-fit:cover}
+        .instructor-info h3{font-size:2rem;font-weight:700;color:#fff;margin-bottom:10px}
+        .instructor-info .title{color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:20px}
+        .instructor-info p{color:rgba(255,255,255,0.9);font-size:1rem;line-height:2;margin-bottom:25px}
+        .instructor-social{display:flex;gap:12px}
+        .instructor-social a{width:45px;height:45px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:1.2rem;transition:all 0.3s;border:1px solid rgba(255,255,255,0.2)}
+        .instructor-social a:hover{background:#fff;color:var(--primary)}
+        
+        .contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+        .contact-card{background:#fff;border-radius:20px;padding:30px;text-align:center;border:1px solid var(--border);transition:all 0.3s}
+        .contact-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.1);border-color:var(--primary)}
+        .contact-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 15px;color:#fff}
+        .contact-card h4{font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:8px}
+        .contact-card p{color:var(--text-light);font-size:0.85rem}
+        .contact-card a{color:var(--primary);text-decoration:none;font-weight:600}
+        
+        footer{background:var(--dark);color:#fff;padding:50px 0 30px;text-align:center}
+        .footer-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
+        .footer-logo img{width:50px;height:50px;border-radius:14px;object-fit:cover}
+        .footer-logo span{font-size:1.4rem;font-weight:700}
+        footer p{color:rgba(255,255,255,0.6);font-size:0.9rem}
+        .footer-links{display:flex;justify-content:center;gap:20px;margin:20px 0}
+        .footer-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+        .footer-links a:hover{color:#fff}
+        
+        .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+        .mobile-menu.active{display:flex}
+        .mobile-menu a{color:#fff;text-decoration:none;font-size:1.3rem;font-weight:600}
+        .mobile-menu .close-btn{position:absolute;top:20px;left:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer}
+        
+        @media(max-width:992px){
+            .services-grid,.courses-grid{grid-template-columns:repeat(2,1fr)}
+            .about-grid{grid-template-columns:1fr}
+            .features-grid{grid-template-columns:repeat(2,1fr)}
+            .contact-grid{grid-template-columns:repeat(2,1fr)}
+            .instructor-card{flex-direction:column;text-align:center}
+            .hero h1{font-size:2.2rem}
+            .nav-links{display:none}
+            .menu-btn{display:block}
+        }
+        @media(max-width:768px){
+            .services-grid,.courses-grid,.features-grid,.contact-grid{grid-template-columns:1fr}
+            .about-stats{grid-template-columns:1fr}
+            .hero h1{font-size:1.8rem}
+            .section-title{font-size:1.8rem}
+            .instructor-avatar{width:150px;height:150px}
+            .hero-badges{flex-direction:column;align-items:center}
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" onclick="closeMobileMenu()">✕</button>
+        <a href="#services" onclick="closeMobileMenu()">خزمەتگوزاری</a>
+        <a href="#about" onclick="closeMobileMenu()">دەربارەی ئێمە</a>
+        <a href="#courses" onclick="closeMobileMenu()">کۆرسەکان</a>
+        <a href="#instructor" onclick="closeMobileMenu()">مامۆستا</a>
+        <a href="#contact" onclick="closeMobileMenu()">پەیوەندی</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-main">
+                <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/logo.jpg" alt="Egeocate Lab Logo">
+            </div>
+            <h1>Egeocate Lab for <span>GIS & RS</span></h1>
+            <p class="hero-subtitle">ماستەرکڵاسی جی ئای ئێس و ڕیمۆت سێنسینگ و دڕۆن بە زمانی کوردی</p>
+            <div class="hero-badges">
+                <div class="hero-badge">📚 زیاتر لە ٩٠٠ وانە</div>
+                <div class="hero-badge">⏱️ زیاتر لە ١٠٠ کاتژمێر</div>
+                <div class="hero-badge">🎓 ڤیدیۆی تۆمارکراو</div>
+                <div class="hero-badge">👨‍🏫 پشتگیری بەردەوام</div>
+            </div>
+            <button class="scroll-btn" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+                <span>خزمەتگوزارییەکانمان ببینە</span>
+                <span>↓</span>
+            </button>
+        </div>
+    </section>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/logo.jpg" alt="Logo">
+                <span>Egeocate Lab</span>
+            </div>
+            <div class="nav-links">
+                <a href="#services">خزمەتگوزاری</a>
+                <a href="#about">دەربارەی ئێمە</a>
+                <a href="#courses">کۆرسەکان</a>
+                <a href="#instructor">مامۆستا</a>
+                <a href="#contact">پەیوەندی</a>
+            </div>
+            <button class="menu-btn" onclick="openMobileMenu()">☰</button>
+        </div>
+    </nav>
+    
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🔶 خزمەتگوزارییەکانمان</span>
+                <h2 class="section-title">دەتوانین چیت بۆ بکەین؟</h2>
+                <p class="section-subtitle">ئێمە لە هەموو قۆناغەکاندا یارمەتیت دەدەین لە فێربوونەوە تا ئەنجامدانی توێژینەوە</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/data%20analysis.jpg" alt="شیکردنەوەی داتا">
+                    </div>
+                    <div class="service-content">
+                        <h3>📊 شیکردنەوەی داتا</h3>
+                        <p>شیکردنەوەی داتای جوگرافی و سەتەلایتی بە بەرنامە پیشەییەکان و دەرهێنانی ئەنجامی وورد و زانستی</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/courses.jpeg" alt="کۆرسی فێرکاری">
+                    </div>
+                    <div class="service-content">
+                        <h3>🎓 کۆرسی فێرکاری GIS</h3>
+                        <p>کۆرسی تەواو لە ئاستی سەرەتاوە تا پێشکەوتوو لە بوارەکانی GIS و Remote Sensing و دڕۆن</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/supervising.jpg" alt="ڕێنمایی ماستەرنامە">
+                    </div>
+                    <div class="service-content">
+                        <h3>📝 ڕێنمایی ماستەرنامە</h3>
+                        <p>سەرپەرشتی و ڕێنماییکردنی قوتابیانی ماستەر و دکتۆرا لە بوارەکانی GIS و ڕیمۆت سێنسینگ</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/creating%20maps.jpg" alt="دروستکردنی نەخشە">
+                    </div>
+                    <div class="service-content">
+                        <h3>🗺️ دروستکردنی نەخشە</h3>
+                        <p>دروستکردن و شیکردنەوەی نەخشەی جوگرافی بە ستانداردی نێودەوڵەتی بۆ هەموو مەبەستێک</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/research.jpg" alt="فێرکاری توێژینەوە">
+                    </div>
+                    <div class="service-content">
+                        <h3>✍️ فێرکاری نووسینی توێژینەوە</h3>
+                        <p>ڕێنمایی تەواو لەسەر چۆنییەتی نووسینی توێژینەوەی زانستی و ماستەرنامە بە شێوازی ئەکادیمی</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/dron.jpg" alt="ڕوپێوی بە دڕۆن">
+                    </div>
+                    <div class="service-content">
+                        <h3>🚁 ڕوپێوی بە دڕۆن</h3>
+                        <p>فێرکاری وێنەگرتن و پرۆسێسکردنی وێنەی دڕۆن و دروستکردنی مۆدێلی سێ بعدی</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/remote%20sensing.jpg" alt="GIS & Remote Sensing">
+                </div>
+                <div class="about-content">
+                    <h2>بۆچی ئێمە هەڵبژێریت؟</h2>
+                    <p>بەهۆی ئەم ماستەرکڵاسەوە دەتوانیت بەلایەنی کەمەوە <strong>٢٠ توێژینەوە</strong> و <strong>١٠ ماستەر</strong> و <strong>٥ دکتۆرا</strong> ئەنجام بدەیت لەسەر بەکارهێنانی تەکنیکەکانی GIS و Remote Sensing و ڕوپێوی بە دڕۆن.</p>
+                    <p>کۆرسەکە لە ئاستی سەرەتاوە تا ئاستی پێشکەوتوو باسی بەکارهێنانی Remote Sensing و ArcGIS و وێنەی سەتەلایتی و دروستکردنی نەخشەی جوگرافی و وێنەگرتن بە دڕۆن دەکات.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">٩٠٠+</div>
+                            <div class="stat-label">وانەی ڤیدیۆیی</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">١٠٠+</div>
+                            <div class="stat-label">کاتژمێر فێرکاری</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">٥+</div>
+                            <div class="stat-label">بەرنامەی سەرەکی</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="courses">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">📚 کۆرسەکانمان</span>
+                <h2 class="section-title">ماستەرکڵاس و کۆرسەکان</h2>
+                <p class="section-subtitle">کۆرسی تەواو لە ئاستی سەرەتاوە تا پێشکەوتوو بە زمانی کوردی</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/arcmap.png" alt="ArcGIS">
+                        <span class="course-badge">سەرەتا - پێشکەوتوو</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>ArcGIS (ArcMap)</h3>
+                        <p>فێربوونی تەواوی بەرنامەی ArcMap بۆ دروستکردن و شیکردنەوەی نەخشەی جوگرافی</p>
+                        <div class="course-meta">
+                            <div class="course-price">$200 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/ArcGISPro.png" alt="ArcGIS Pro">
+                        <span class="course-badge">نوێترین وەشان</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>ArcGIS Pro</h3>
+                        <p>نوێترین بەرنامەی ESRI بۆ GIS پێشکەوتوو و شیکردنەوەی داتای مەکانی</p>
+                        <div class="course-meta">
+                            <div class="course-price">$300 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/remote%20sensing.jpg" alt="Remote Sensing">
+                        <span class="course-badge">Remote Sensing</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>Remote Sensing & ENVI</h3>
+                        <p>شیکردنەوەی وێنەی سەتەلایتی و پۆلێنکردنی وێنە بە بەرنامەی ENVI</p>
+                        <div class="course-meta">
+                            <div class="course-price">$200 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/GoogleEarthEngine.png" alt="Google Earth Engine">
+                        <span class="course-badge">Cloud Computing</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>Google Earth Engine</h3>
+                        <p>شیکردنەوەی داتای گەورە لەسەر کلاود بە بەرنامەی گووگڵ ئێرس ئینجین</p>
+                        <div class="course-meta">
+                            <div class="course-price">$200 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/ahp.jpg" alt="AHP">
+                        <span class="course-badge">Decision Making</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>AHP Analysis</h3>
+                        <p>شیکردنەوەی هەڵسەنگاندنی پێوەرەکان و بڕیاردان بە تەکنیکی AHP</p>
+                        <div class="course-meta">
+                            <div class="course-price">$200 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/dron.jpg" alt="Drone">
+                        <span class="course-badge">Pix4D</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>ماستەرکڵاسی دڕۆن</h3>
+                        <p>ڕوپێوی بە دڕۆن و پرۆسێسکردنی وێنە و دروستکردنی DEM و Orthomosaic</p>
+                        <div class="course-meta">
+                            <div class="course-price">$300 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/hydrology.jpg" alt="Hydrology">
+                        <span class="course-badge">Hydrology</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>GIS بۆ لافاو و هایدرۆلۆجی</h3>
+                        <p>شیکردنەوەی لافاو و بەڕێوەبردنی ئاو بە تەکنیکەکانی GIS</p>
+                        <div class="course-meta">
+                            <div class="course-price">$300 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/agriculture.jpg" alt="Agriculture">
+                        <span class="course-badge">Agriculture</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>GIS بۆ کشتوکاڵ</h3>
+                        <p>بەکارهێنانی GIS و RS لە کشتوکاڵ و چاودێریی بەرهەمهێنان</p>
+                        <div class="course-meta">
+                            <div class="course-price">$300 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/urban%20planning.jpg" alt="Urban Planning">
+                        <span class="course-badge">Urban Planning</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>GIS بۆ پلاندانانی شار</h3>
+                        <p>بەکارهێنانی GIS لە پلاندانانی شارستانی و گەشەپێدانی شار</p>
+                        <div class="course-meta">
+                            <div class="course-price">$300 <span>دۆلار</span></div>
+                            <a href="#contact" class="course-btn">تۆماربوون</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📹</div>
+                    <h4>ڤیدیۆی تۆمارکراو</h4>
+                    <p>بەپێی کاتی خۆت سەیری دەکەیت</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">♾️</div>
+                    <h4>دەستگەیشتنی هەمیشەیی</h4>
+                    <p>ڤیدیۆکان بۆ هەمیشە لات دەمێننەوە</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <h4>پشتگیری بەردەوام</h4>
+                    <p>مامۆستا وەڵامی پرسیارەکانت دەداتەوە</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📜</div>
+                    <h4>بڕوانامە</h4>
+                    <p>بڕوانامەی بەشداریکردن دەوەرگریت</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="instructor-section" id="instructor">
+        <div class="container">
+            <div class="instructor-card">
+                <div class="instructor-avatar">
+                    <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/teacher.jpg" alt="کەیفی چۆمانی">
+                </div>
+                <div class="instructor-info">
+                    <h3>کەیفی چۆمانی</h3>
+                    <p class="title">مامۆستا و پسپۆڕی GIS & Remote Sensing</p>
+                    <p>مامۆستای کۆرسەکان و پسپۆڕ لە بوارەکانی سیستەمی زانیاری جوگرافی و ڕیمۆت سێنسینگ و ڕوپێوی بە دڕۆن. خاوەنی ئەزموونی چەندین ساڵ لە فێرکاری و توێژینەوە لەم بوارەدا.</p>
+                    <div class="instructor-social">
+                        <a href="https://www.linkedin.com/in/kaifi-chomani-b100a2298/" target="_blank" title="LinkedIn">💼</a>
+                        <a href="https://www.facebook.com/egeocategis" target="_blank" title="Facebook">📘</a>
+                        <a href="https://t.me/tnacademia/2266" target="_blank" title="Telegram">✈️</a>
+                        <a href="https://wa.me/9647501547802" target="_blank" title="WhatsApp">📱</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">📞 پەیوەندیمان پێوە بکە</span>
+                <h2 class="section-title">چۆن پەیوەندیمان پێوە دەکەیت؟</h2>
+                <p class="section-subtitle">بۆ تۆماربوون یان هەر پرسیارێک پەیوەندیمان پێوە بکە</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h4>وەتسئەپ</h4>
+                    <p><a href="https://wa.me/9647501547802">+964 750 154 7802</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✈️</div>
+                    <h4>تەلەگرام</h4>
+                    <p><a href="https://t.me/tnacademia/2266" target="_blank">@tnacademia</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📘</div>
+                    <h4>فەیسبووک</h4>
+                    <p><a href="https://www.facebook.com/egeocategis" target="_blank">egeocategis</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h4>لینکدئین</h4>
+                    <p><a href="https://www.linkedin.com/in/kaifi-chomani-b100a2298/" target="_blank">Kaifi Chomani</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://raw.githubusercontent.com/kaifichomani/egeocate-page/main/image/logo.jpg" alt="Logo">
+                <span>Egeocate Lab for GIS & RS</span>
+            </div>
+            <div class="footer-links">
+                <a href="#services">خزمەتگوزاری</a>
+                <a href="#courses">کۆرسەکان</a>
+                <a href="#instructor">مامۆستا</a>
+                <a href="#contact">پەیوەندی</a>
+            </div>
+            <p>© ٢٠٢٥ Egeocate Lab - هەموو مافەکان پارێزراون</p>
+        </div>
+    </footer>
+
+    <script>
+        function openMobileMenu(){document.getElementById('mobileMenu').classList.add('active');document.body.style.overflow='hidden'}
+        function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('active');document.body.style.overflow='auto'}
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+        window.addEventListener('scroll',function(){const n=document.querySelector('nav');n.style.boxShadow=window.scrollY>100?'0 4px 30px rgba(0,0,0,0.15)':'0 2px 20px rgba(0,0,0,0.08)'});
+    </script>
+</body>
+</html>
